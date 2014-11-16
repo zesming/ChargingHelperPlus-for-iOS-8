@@ -4,8 +4,6 @@
 <dict>
     <key>General</key>
     <string>General</string>
-    <key>"Battery Detail" will show the battery info when the charger plugs in and plugs out.</key>
-    <string>"Battery Detail" will show the battery info when the charger plugs in and plugs out.</string>
     <key>Repeat Alerts</key>
     <string>Repeat Alerts</string>
     <key>Pop Alert</key>
@@ -14,8 +12,6 @@
     <string>Ring</string>
     <key>Vibrate</key>
     <string>Vibrate</string>
-    <key>Battery Detail</key>
-    <string>Battery Detail</string>
     <key>Charge Mode</key>
     <string>Charge Mode</string>
     <key>Charge Mode</key>
@@ -38,7 +34,5 @@
     <string>White</string>
     <key>Black</key>
     <string>Black</string>
-    <key>The "Font Color" setting works on iOS 7 only.</key>
-    <string>The "Font Color" setting works on iOS 7 only.</string>
 </dict>
 </plist>

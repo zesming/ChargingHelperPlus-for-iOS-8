@@ -9,7 +9,7 @@
 		<key>icon</key>
 		<string>ChargingHelperIcon.png</string>
 		<key>label</key>
-		<string>ChargingHelper</string>
+		<string>ChargingHelperPlus</string>
 	</dict>
 	<key>items</key>
 	<array>
@@ -21,7 +21,7 @@
 			<key>label</key>
 			<string>General</string>
 			<key>footerText</key>
-			<string>&quot;Battery Detail&quot; will show the battery info when the charger plugs in and plugs out.</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -76,20 +76,6 @@
 			<string>isVibrate</string>
 			<key>label</key>
 			<string>Vibrate</string>
-			<key>PostNotification</key>
-			<string>cn.ming.ChargingHelper-preferencesChanged</string>
-		</dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<false/>
-			<key>defaults</key>
-			<string>cn.ming.ChargingHelper</string>
-			<key>key</key>
-			<string>isShowDetail</string>
-			<key>label</key>
-			<string>Battery Detail</string>
 			<key>PostNotification</key>
 			<string>cn.ming.ChargingHelper-preferencesChanged</string>
 		</dict>
@@ -181,7 +167,7 @@
 			<key>label</key>
 			<string>Lock Screen Font Color</string>
 			<key>footerText</key>
-			<string>The &quot;Font Color&quot; setting works on iOS 7 only.</string>
+			<string></string>
 		</dict>
 		<dict>
 			<key>cell</key>
@@ -223,6 +209,6 @@
 		</dict>
 	</array>
 	<key>title</key>
-	<string>ChargingHelper</string>
+	<string>ChargingHelperPlus</string>
 </dict>
 </plist>

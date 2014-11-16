@@ -7,10 +7,9 @@ BOOL isCharging, externalConnected, externalChargeCapable;
 @interface SpringBoard : UIApplication
 - (void)popAlertView;
 - (void)popDIYLevelAlertView;
-- (void)popBatteryDetail;
 - (void)playVibrate;
 - (void)playSound;
-//- (void)writeStatusToFile
+- (void)writeStatusToFile:(id)batteryStatus;
 //- (void)recordChargingLog;
 @end
 
@@ -35,10 +34,9 @@ NSDictionary *batteryStatusDic, *dicLog;
     externalChargeCapable = [[batteryStatus objectForKey:@"ExternalChargeCapable"] boolValue];
     BOOL fullyCharged = [[batteryStatus objectForKey:@"FullyCharged"] boolValue];
     
-    /***********************************************
-     record the charging status,
-     it can be removed if you don't want to use it. 
-     ***********************************************/
+    // write the battery status in /tmp for My Battery
+    // replace when I find a way read from IOKit
+    [self writeStatusToFile:batteryStatus];
     
     /*
     if (isCharging || externalConnected || externalChargeCapable){
@@ -67,12 +65,6 @@ NSDictionary *batteryStatusDic, *dicLog;
         int chargeMode = [[preference objectForKey:@"chargeMode"] intValue];
         int alertLevel = [[preference objectForKey:@"alertLevel"] intValue];
         [preference release];
-        
-        /* Show battery detail when cable plug in */
-        if(isShowDetail && detailFlag){
-            [self popBatteryDetail];
-            detailFlag = NO;
-        }
         
         /* Alert Level is not 100% */
         if(alertLevel != 0 && alertLevel != 100)
@@ -182,13 +174,6 @@ NSDictionary *batteryStatusDic, *dicLog;
     }else{
         repeatFlag = YES;
         alertLevelFlag = YES;
-        
-        //show battery detail when cable plug out
-        if(!detailFlag)
-        {
-            [self popBatteryDetail];
-            detailFlag = YES;
-        }
     }
  
     %orig;
@@ -256,55 +241,6 @@ NSDictionary *batteryStatusDic, *dicLog;
 }
 
 %new
--(void)popBatteryDetail
-{
-    /* check the os language */
-    NSArray *languages = [NSLocale preferredLanguages];
-    NSString *currentLanguage = [languages objectAtIndex:0];
-    NSString *title, *msg, *currentCapacityLabel, *maxCapacityLabel, *designCapacityLabel, *batteryLifeLabel, *cycleCountLabel, *temperatureLabel, *cbButton;
-    float batteryLife, batteryTemperature;
-    
-    batteryLife = ((float)maxCapacity /designCapacity) * 100;
-    batteryTemperature = ((float)temperature / 100);
-    
-    if ([currentLanguage isEqualToString:@"zh-Hans"]) {
-        title = @"电池信息";
-        currentCapacityLabel = @"当前容量";
-        maxCapacityLabel = @"最大容量";
-        designCapacityLabel = @"设计容量";
-        batteryLifeLabel = @"健康度";
-        cycleCountLabel = @"循环次数";
-        temperatureLabel = @"电池温度";
-        cbButton = @"确定";
-    }else if([currentLanguage isEqualToString:@"zh-Hant"]){
-        title = @"電池信息";
-        currentCapacityLabel = @"當前容量";
-        maxCapacityLabel = @"最大容量";
-        designCapacityLabel = @"設計容量";
-        batteryLifeLabel = @"健康度";
-        cycleCountLabel = @"循環次數";
-        temperatureLabel = @"電池溫度";
-        cbButton = @"好";
-    }else{
-        title = @"Battery Info";
-        currentCapacityLabel = @"Current Capacity";
-        maxCapacityLabel = @"Max Capacity";
-        designCapacityLabel = @"Design Capacity";
-        batteryLifeLabel = @"Remain";
-        cycleCountLabel = @"Cycles";
-        temperatureLabel = @"Temperature";
-        cbButton = @"OK";
-    }
-    
-    msg = [NSString stringWithFormat:@"%@:%d mAh \n%@:%d mAh \n%@:%d mAh \n%@:%.1f%% \n%@:%d \n%@:%.1f℃", currentCapacityLabel, currentCapacity, maxCapacityLabel, maxCapacity, designCapacityLabel, designCapacity, batteryLifeLabel, batteryLife, cycleCountLabel, cycleCount, temperatureLabel, batteryTemperature];
-    
-    //pop the alert view
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:msg delegate:nil cancelButtonTitle:cbButton otherButtonTitles:nil];
-    [alert show];
-    [alert release];
-}
-
-%new
 -(void)playVibrate
 {
     SystemSoundID vibrate;
@@ -322,11 +258,13 @@ NSDictionary *batteryStatusDic, *dicLog;
     AudioServicesPlaySystemSound(sameViewSoundID); //play SoundID's sound
 }
 
-//%new
-//- (void)writeStatusToFile
-//{
-//    
-//}
+%new
+- (void)writeStatusToFile:(id)batteryStatus
+{
+    NSDictionary *batteryStatusDictionary;
+    batteryStatusDictionary = batteryStatus;
+    [batteryStatusDictionary writeToFile:@"/tmp/batteryStatus.plist" atomically:YES];
+}
 
 /* a method to record the charging status */
 /*
@@ -470,7 +408,6 @@ UILabel *batteryLevel, *remainingTime;
     
     if(isCharging){
         if(levelPercent < 100 && instantAmperage > 0){
-            
             if(levelPercent < 80){
                 timeHour = (((maxCapacity * 0.8) - currentCapacity) / instantAmperage) + 1;
                 hour = timeHour;
@@ -481,7 +418,7 @@ UILabel *batteryLevel, *remainingTime;
                 timeMsg = [NSString stringWithFormat:@"%@:%d%@", chargingLabel, min, minLabel];
             }
 
-        }else if(levelPercent == 100){
+        } else if(levelPercent >= 100) {
             switch (chargeMode) {
                 case 1:
                     timeMsg = completeLabel;
@@ -493,7 +430,7 @@ UILabel *batteryLevel, *remainingTime;
                     timeMsg = completeLabel;
                     break;
             }
-        }else{
+        } else {
             timeMsg = calulateLabel;
         }
     }else if(!externalChargeCapable && externalConnected) {

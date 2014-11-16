@@ -21,7 +21,6 @@
 		FE56F2D118F62DFC007475D6 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
 		FE56F2D318F62DFC007475D6 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
 		FE56F2D718F62DFC007475D6 /* ChargingHelper.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ChargingHelper.plist; path = Package/Library/PreferenceLoader/Preferences/ChargingHelper.plist; sourceTree = "<group>"; };
-		FE56F2D818F62DFC007475D6 /* ChargingHelperIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ChargingHelperIcon.png; path = Package/Library/PreferenceLoader/Preferences/ChargingHelperIcon.png; sourceTree = "<group>"; };
 		FE56F2D918F62DFC007475D6 /* ChargingHelperIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ChargingHelperIcon@2x.png"; path = "Package/Library/PreferenceLoader/Preferences/ChargingHelperIcon@2x.png"; sourceTree = "<group>"; };
 		FE56F2DA18F62DFC007475D6 /* ChargingHelper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChargingHelper-Prefix.pch"; sourceTree = "<group>"; };
 		FE56F2DB18F62DFC007475D6 /* ChargingHelper.xm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ChargingHelper.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -137,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				FE56F2D718F62DFC007475D6 /* ChargingHelper.plist */,
-				FE56F2D818F62DFC007475D6 /* ChargingHelperIcon.png */,
 				FE56F2D918F62DFC007475D6 /* ChargingHelperIcon@2x.png */,
 				FEA9BB3C18FBD9BA00BEFFA0 /* ChargingHelper.strings */,
 			);

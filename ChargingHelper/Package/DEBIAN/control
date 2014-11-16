@@ -1,10 +1,10 @@
-Package: cn.ming.ChargingHelper.iOS8
-Name: ChargingHelper for iOS 8
-Version: 0.6.2-1
-Description: 
+Package: cn.ming.ChargingHelperPlus.iOS8
+Name: ChargingHelperPlus for iOS 8
+Version: 0.7.0-1
+Description: A charging reminder & battery status display
 Section: System
 Depends: firmware (>= 8.0), mobilesubstrate
-Conflicts: cn.ming.ChargingHelper, cn.ming.charginghelperplus, cn.ming.charginghelperplus.ios8
+Conflicts: cn.ming.ChargingHelper, cn.ming.charginghelperplus, cn.ming.charginghelper.ios8
 Replaces: 
 Priority: optional
 Architecture: iphoneos-arm
@@ -12,6 +12,6 @@ Author: Ming
 dev: 
 Homepage: 
 Depiction: 
-Maintainer: 
+Maintainer: Ming
 Icon:
 

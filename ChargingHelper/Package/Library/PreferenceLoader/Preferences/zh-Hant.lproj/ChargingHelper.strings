@@ -4,8 +4,6 @@
 <dict>
 	<key>General</key>
 	<string>設置開關</string>
-    <key>"Battery Detail" will show the battery info when the charger plugs in and plugs out.</key>
-    <string>打開"電池信息"，在你插入和拔出充電器的時候會顯示當前電池信息。</string>
 	<key>Repeat Alerts</key>
 	<string>重復提醒</string>
     <key>Pop Alert</key>
@@ -14,8 +12,6 @@
 	<string>聲音提示</string>
 	<key>Vibrate</key>
 	<string>振動提示</string>
-    <key>Battery Detail</key>
-    <string>電池信息</string>
     <key>Charge Mode</key>
     <string>充電模式</string>
     <key>Charge Mode</key>
@@ -38,7 +34,5 @@
 	<string>白色</string>
 	<key>Black</key>
 	<string>黑色</string>
-    <key>The "Font Color" setting works on iOS 7 only.</key>
-    <string>字體顏色設置僅適用於iOS 7</string>
 </dict>
 </plist>
